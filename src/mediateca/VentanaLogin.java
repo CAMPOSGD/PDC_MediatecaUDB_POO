@@ -3,6 +3,7 @@ package mediateca;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class VentanaLogin extends JFrame {
     private JTextField txtUser = new JTextField(15);
     private JPasswordField txtPass = new JPasswordField(15);
@@ -10,18 +11,50 @@ public class VentanaLogin extends JFrame {
 
     public VentanaLogin() {
         setTitle("Login - Mediateca Don Bosco");
-        setSize(350, 250);
+        setSize(420, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new GridLayout(4, 1, 10, 10));
+        setLayout(new BorderLayout());
 
-        JPanel p1 = new JPanel(); p1.add(new JLabel("Usuario:")); p1.add(txtUser);
-        JPanel p2 = new JPanel(); p2.add(new JLabel("Contraseña:")); p2.add(txtPass);
+        JLabel lblTitulo = new JLabel("Acceso al Sistema", SwingConstants.CENTER);
+        lblTitulo.setFont(new Font("Arial", Font.BOLD, 14));
+        lblTitulo.setBorder(BorderFactory.createEmptyBorder(25, 0, 20, 0));
 
-        add(new JLabel("Acceso al Sistema", SwingConstants.CENTER));
-        add(p1);
-        add(p2);
-        add(btnLogin);
+        JPanel panelCentro = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblUsuario = new JLabel("Usuario:");
+        lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panelCentro.add(lblUsuario, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panelCentro.add(txtUser, gbc);
+
+        JLabel lblPassword = new JLabel("Contraseña:");
+        lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelCentro.add(lblPassword, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panelCentro.add(txtPass, gbc);
+
+        JPanel panelBoton = new JPanel(new BorderLayout());
+        panelBoton.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        panelBoton.add(btnLogin, BorderLayout.CENTER);
+
+        add(lblTitulo, BorderLayout.NORTH);
+        add(panelCentro, BorderLayout.CENTER);
+        add(panelBoton, BorderLayout.SOUTH);
 
         btnLogin.addActionListener(e -> {
             String user = txtUser.getText();
@@ -31,7 +64,7 @@ public class VentanaLogin extends JFrame {
             String rolObtenido = dao.login(user, pass);
 
             if (rolObtenido != null) {
-                JOptionPane.showMessageDialog(this, "Bienvenido " + user + " (" + rolObtenido + ")");
+                JOptionPane.showMessageDialog(this, "Bienvenido " + user);
                 new MenuPrincipal(rolObtenido).setVisible(true);
                 this.dispose();
             } else {
