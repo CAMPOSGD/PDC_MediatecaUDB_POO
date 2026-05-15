@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaterialDAO {
+public class MaterialCRUD {
 
     public boolean insertarLibro(Libro l) {
         String sql = "INSERT INTO libros "

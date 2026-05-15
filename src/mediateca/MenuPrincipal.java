@@ -129,7 +129,7 @@ public class MenuPrincipal extends JFrame {
     private void cargarDatosMateriales() {
         String tablaSeleccionada = comboCategorias.getSelectedItem().toString();
 
-        MaterialDAO dao = new MaterialDAO();
+        MaterialCRUD dao = new MaterialCRUD();
         List<Object[]> datos = dao.consultarTodo(tablaSeleccionada);
 
         modeloMateriales.setRowCount(0);

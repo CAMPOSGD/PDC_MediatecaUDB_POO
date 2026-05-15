@@ -60,7 +60,7 @@ public class VentanaLogin extends JFrame {
             String user = txtUser.getText();
             String pass = new String(txtPass.getPassword());
 
-            UsuarioDAO dao = new UsuarioDAO();
+            UsuarioCRUD dao = new UsuarioCRUD();
             String rolObtenido = dao.login(user, pass);
 
             if (rolObtenido != null) {
@@ -74,7 +74,7 @@ public class VentanaLogin extends JFrame {
     }
 
     public static void main(String[] args) {
-        new UsuarioDAO().inicializarSistema();
+        new UsuarioCRUD().inicializarSistema();
 
         SwingUtilities.invokeLater(() -> {
             new VentanaLogin().setVisible(true);

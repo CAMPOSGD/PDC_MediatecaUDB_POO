@@ -33,7 +33,7 @@ public class VentanaCambiarRol extends JFrame {
     }
 
     private void cambiarRol() {
-        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioCRUD dao = new UsuarioCRUD();
 
         String user = txtUser.getText();
         String rol = comboRol.getSelectedItem().toString();

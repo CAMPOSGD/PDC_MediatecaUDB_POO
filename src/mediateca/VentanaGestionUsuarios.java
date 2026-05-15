@@ -41,7 +41,7 @@ public class VentanaGestionUsuarios extends JFrame {
     }
 
     private void crearUsuario() {
-        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioCRUD dao = new UsuarioCRUD();
 
         String nombre = txtNombre.getText();
         String user = txtUser.getText();

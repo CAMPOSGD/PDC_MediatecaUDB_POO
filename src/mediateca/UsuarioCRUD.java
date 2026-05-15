@@ -2,7 +2,7 @@ package mediateca;
 
 import java.sql.*;
 
-public class UsuarioDAO {
+public class UsuarioCRUD {
 
     public void inicializarSistema() {
         try (Connection cn = Conexion.getConexionServidor()) {
@@ -13,13 +13,11 @@ public class UsuarioDAO {
 
             try (Statement st = cn.createStatement()) {
 
-                // Crear la base de datos si no existe
                 st.executeUpdate("CREATE DATABASE IF NOT EXISTS mediatecadb");
 
-                // Seleccionar la base de datos
                 st.executeUpdate("USE mediatecadb");
 
-                // Tabla de usuarios
+                // usuarios
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS usuarios ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "username VARCHAR(50) UNIQUE NOT NULL, "
@@ -27,7 +25,7 @@ public class UsuarioDAO {
                         + "nombre_completo VARCHAR(100) NOT NULL, "
                         + "rol ENUM('Administrador', 'Profesor', 'Alumno') NOT NULL)");
 
-                // Tabla de libros
+                // libros
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS libros ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "codigo VARCHAR(20) UNIQUE, "
@@ -40,7 +38,7 @@ public class UsuarioDAO {
                         + "cantidad INT NOT NULL, "
                         + "disponibles INT NOT NULL)");
 
-                // Tabla de tesis
+                // tesis
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS tesis ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "codigo VARCHAR(20) UNIQUE, "
@@ -52,7 +50,7 @@ public class UsuarioDAO {
                         + "cantidad INT NOT NULL, "
                         + "disponibles INT NOT NULL)");
 
-                // Tabla de CDs
+                // cd
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS cds ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "codigo VARCHAR(20) UNIQUE, "
@@ -65,7 +63,7 @@ public class UsuarioDAO {
                         + "cantidad INT NOT NULL, "
                         + "disponibles INT NOT NULL)");
 
-                // Tabla de revistas
+                // revistas
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS revistas ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "codigo VARCHAR(20) UNIQUE, "
@@ -77,13 +75,13 @@ public class UsuarioDAO {
                         + "cantidad INT NOT NULL, "
                         + "disponibles INT NOT NULL)");
 
-                // Tabla de configuración
+                // configuracion
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS configuracion ("
                         + "id INT PRIMARY KEY, "
                         + "mora_diaria DOUBLE NOT NULL, "
                         + "limite_prestamos INT NOT NULL)");
 
-                // Tabla préstamos
+                // préstamos
                 st.executeUpdate("CREATE TABLE IF NOT EXISTS prestamos ("
                         + "id INT AUTO_INCREMENT PRIMARY KEY, "
                         + "codigo_material VARCHAR(20) NOT NULL, "
@@ -94,12 +92,10 @@ public class UsuarioDAO {
                         + "mora_pagada DOUBLE DEFAULT 0, "
                         + "estado VARCHAR(20) DEFAULT 'Activo')");
 
-                // Configuración inicial
                 st.executeUpdate("INSERT IGNORE INTO configuracion "
                         + "(id, mora_diaria, limite_prestamos) "
                         + "VALUES (1, 0.25, 3)");
 
-                // Usuario administrador base
                 st.executeUpdate("INSERT IGNORE INTO usuarios "
                         + "(username, password, nombre_completo, rol) "
                         + "VALUES ('admin', '1234', 'Administrador del Sistema', 'Administrador')");

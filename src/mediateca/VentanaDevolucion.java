@@ -37,8 +37,8 @@ public class VentanaDevolucion extends JFrame {
     private void cargarAlumnosConPrestamos() {
         comboAlumno.removeAllItems();
 
-        PrestamoDAO dao = new PrestamoDAO();
-        List<Object[]> alumnos = dao.obtenerAlumnosConPrestamosActivos();
+        PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
+        List<Object[]> alumnos = prestamoCRUD.obtenerAlumnosConPrestamosActivos();
 
         if (alumnos.isEmpty()) {
             comboAlumno.addItem(new ItemAlumno("", "No hay alumnos con préstamos activos"));
@@ -67,8 +67,8 @@ public class VentanaDevolucion extends JFrame {
             return;
         }
 
-        PrestamoDAO dao = new PrestamoDAO();
-        List<Object[]> prestamos = dao.obtenerPrestamosActivosPorAlumno(alumno.getUsername());
+        PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
+        List<Object[]> prestamos = prestamoCRUD.obtenerPrestamosActivosPorAlumno(alumno.getUsername());
 
         if (prestamos.isEmpty()) {
             comboPrestamo.addItem(new ItemPrestamo(0, "No hay préstamos activos", null, null));
@@ -93,8 +93,8 @@ public class VentanaDevolucion extends JFrame {
             return;
         }
 
-        PrestamoDAO prestamoDAO = new PrestamoDAO();
-        double mora = prestamoDAO.procesarDevolucion(prestamo.getId());
+        PrestamoCRUD prestamoCRUD = new PrestamoCRUD();
+        double mora = prestamoCRUD.procesarDevolucion(prestamo.getId());
 
         if (mora >= 0) {
             if (mora > 0) {
@@ -107,7 +107,7 @@ public class VentanaDevolucion extends JFrame {
             dispose();
 
         } else {
-            JOptionPane.showMessageDialog(this, prestamoDAO.getMensajeError());
+            JOptionPane.showMessageDialog(this, prestamoCRUD.getMensajeError());
         }
     }
 

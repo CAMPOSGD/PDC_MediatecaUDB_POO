@@ -29,7 +29,7 @@ public class VentanaRestablecerPassword extends JFrame {
     }
 
     private void restablecerPassword() {
-        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioCRUD dao = new UsuarioCRUD();
 
         String user = txtUser.getText();
         String pass = new String(txtPass.getPassword());

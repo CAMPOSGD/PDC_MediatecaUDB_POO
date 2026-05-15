@@ -55,7 +55,7 @@ public class VentanaPrestamo extends JFrame {
 
         String tipoSeleccionado = comboTipo.getSelectedItem().toString();
 
-        PrestamoDAO dao = new PrestamoDAO();
+        PrestamoCRUD dao = new PrestamoCRUD();
         List<Object[]> materiales = dao.obtenerMaterialesDisponibles(tipoSeleccionado);
 
         if (materiales.isEmpty()) {
@@ -78,7 +78,7 @@ public class VentanaPrestamo extends JFrame {
     private void cargarAlumnos() {
         comboAlumno.removeAllItems();
 
-        PrestamoDAO dao = new PrestamoDAO();
+        PrestamoCRUD dao = new PrestamoCRUD();
         List<Object[]> alumnos = dao.obtenerAlumnos();
 
         if (alumnos.isEmpty()) {
@@ -121,10 +121,7 @@ public class VentanaPrestamo extends JFrame {
             return;
         }
 
-        System.out.println("Código enviado al préstamo: " + material.getCodigo());
-        System.out.println("Alumno enviado al préstamo: " + alumno.getUsername());
-
-        PrestamoDAO dao = new PrestamoDAO();
+        PrestamoCRUD dao = new PrestamoCRUD();
 
         if (dao.registrarPrestamo(material.getCodigo(), alumno.getUsername())) {
             JOptionPane.showMessageDialog(this, "Préstamo registrado con éxito.");

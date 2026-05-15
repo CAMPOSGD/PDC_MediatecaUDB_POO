@@ -81,7 +81,7 @@ public class VentanaLibro extends JFrame {
                         cantidad
                 );
 
-                if (new MaterialDAO().insertarLibro(l)) {
+                if (new MaterialCRUD().insertarLibro(l)) {
                     JOptionPane.showMessageDialog(this, "Libro guardado correctamente.");
                     dispose();
                 } else {

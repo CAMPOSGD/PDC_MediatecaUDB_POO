@@ -71,7 +71,7 @@ public class VentanaTesis extends JFrame {
                         cantidad
                 );
 
-                if (new MaterialDAO().insertarTesis(t)) {
+                if (new MaterialCRUD().insertarTesis(t)) {
                     JOptionPane.showMessageDialog(this, "Tesis guardada correctamente.");
                     dispose();
                 } else {

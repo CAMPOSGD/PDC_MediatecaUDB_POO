@@ -83,7 +83,7 @@ public class VentanaCD extends JFrame {
                         cantidad
                 );
 
-                if (new MaterialDAO().insertarCD(cd)) {
+                if (new MaterialCRUD().insertarCD(cd)) {
                     JOptionPane.showMessageDialog(this, "CD guardado correctamente.");
                     dispose();
                 } else {

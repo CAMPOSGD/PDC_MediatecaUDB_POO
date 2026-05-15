@@ -70,7 +70,7 @@ public class VentanaRevista extends JFrame {
                         cantidad
                 );
 
-                if (new MaterialDAO().insertarRevista(r)) {
+                if (new MaterialCRUD().insertarRevista(r)) {
                     JOptionPane.showMessageDialog(this, "Revista guardada correctamente.");
                     dispose();
                 } else {
